@@ -103,7 +103,7 @@
 					<h3>How do I do anything useful?</h3>
 
 					<pre class="fragment"><code class="hljs" data-trim>
-						def handleRequest(request: Request): Response = {
+						val handleRequest: Request => Response = { request =>
 							...
 						}
 					</code></pre>
@@ -111,7 +111,7 @@
 				<section>
 					<h3>What about external state?</h3>
 					<pre><code class="hljs" data-trim>
-						def getUsers(): List[User]
+						val getUsers: () => List[User]
 					</code></pre>
 				</section>
 				<section>
@@ -121,7 +121,7 @@
 						val cu = upper.andThen(count)
 						cu("hello")
 
-						def doSomethingToFirst(s: String, f: Char => Char): String = {
+						val doSomethingToFirst = (s: String, f: Char => Char) => {
 						  if (s.nonEmpty)
 						    f(s.head) + s.tail
 						  else

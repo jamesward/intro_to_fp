@@ -10,5 +10,7 @@ class JavaApp {
         Integer k = addOne(2);
 
         Integer l = addOne(2);
+
+        Integer m = addOne(2);
     }
 }
