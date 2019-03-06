@@ -1,6 +1,6 @@
 object ScalaStuff {
 
-  def addOne(i: Int): Int = {
+  val addOne: Int => Int = { i =>
     i + 1
   }
 
