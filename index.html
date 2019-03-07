@@ -135,6 +135,9 @@
 						  else
 						    s
 						}
+
+						val d = doSomethingToFirst("asdf", _)
+						d(_.toUpper)
 					</code></pre>
 				</section>
 				<section data-background="img/alert.gif" style="color:black">
@@ -142,6 +145,7 @@
 
 					<ul>
 						<li class="fragment">Higher-order Functions</li>
+						<li class="fragment">Currying</li>
 					</ul>
 				</section>
 				<section>
@@ -198,7 +202,7 @@
 				</section>
 				<section data-background="img/alert.gif" style="color:black">
 					<h3 style="color:black">Jargon Alert!</h3>
-	
+
 					<ul>
 						<li class="fragment">Monad</li>
 					</ul>
@@ -212,6 +216,46 @@
 								wordReqs =  Seq.fill(num)(client.url(randomWordUrl).get().map(_.body))
 								words    <- Future.sequence(wordReqs)
 							} yield words.mkString(" ")
+					</code></pre>
+				</section>
+				<section>
+					<pre><code class="hljs" data-trim>
+						("asdf", 2)
+
+						case class Foo(name: String, age: Int)
+
+						Foo("asdf", 1)
+
+
+						sealed trait Bar
+						case class FooBar() extends Bar
+						case class BarBar() extends Bar
+
+						val b: Bar = BarBar()
+					</code></pre>
+				</section>
+				<section data-background="img/alert.gif" style="color:black">
+					<h3 style="color:black">Jargon Alert!</h3>
+
+					<ul>
+						<li class="fragment">Algebraic Data Types</li>
+						<li class="fragment">Product Types</li>
+						<li class="fragment">Sum Types</li>
+					</ul>
+				</section>
+				<section>
+					<h3>Pattern Matching</h3>
+
+					<pre><code class="hljs" data-trim>
+							foo match {
+								case Foo(name, 2) => name
+								case _ => "arggg!"
+							}
+
+							b match {
+								case FooBar() => "foo"
+								case BarBar() => "bar"
+							}
 					</code></pre>
 				</section>
 				<section>
