@@ -88,13 +88,13 @@
                 <section>
                     <h3>What about external state?</h3>
                     <pre><code class="hljs" data-trim>
-                        val getUsers: () => List[User]
+                        Supplier&lt;List&lt;User&gt;&gt; getUsers = ???
                     </code></pre>
                 </section>
                 <section>
                     <h3>First-order Composition / Chaining</h3>
                     <pre class="fragment"><code class="hljs" data-trim>
-                        static public Function<String, Integer> count = String::length;
+                        static public Function&lt;String, Integer&gt; count = String::length;
                         addTwo.apply(count.apply("asdf"))
                     </code></pre>
                 </section>
@@ -103,7 +103,7 @@
 
                     <pre class="fragment"><code class="hljs" data-trim>
                         var c2 = count.andThen(addTwo);
-                            var l = c2.apply("asdf");
+                        var l = c2.apply("asdf");
                     </code></pre>
                 </section>
                 <section data-background="img/alert.gif" style="color:black">
@@ -124,10 +124,10 @@
                 <section>
                     <pre><code class="hljs" data-trim>
                         var o = Optional.of("asdf");
-                        //var o = Optional.<String>empty();
-                            var p = o.map(count);
+                        //var o = Optional.&lt;String&gt;empty();
+                        var p = o.map(count);
 
-                        var q = o.filter(s -> s.startsWith("a"));
+                        var q = o.filter(s -&gt; s.startsWith("a"));
 
                         Arrays.stream(new String[]{"asdf", "a"}).map(count).forEach(System.out::println);
                         var n = Arrays.stream(new String[]{"asdf", "a"}).map(count).reduce(Integer::sum);
@@ -143,12 +143,12 @@
                 </section>
                 <section>
                     <pre><code class="hljs" data-trim>
-                        var result = ws.apply(client -> {
-                            Supplier<CompletableFuture<String>> randomWord = () -> client.url(randomWordUrl).get().thenApply(StandaloneWSResponse::getBody).toCompletableFuture();
+                        var result = ws.apply(client -&gt; {
+                            Supplier&lt;CompletableFuture&lt;String&gt;&gt; randomWord = () -&gt; client.url(randomWordUrl).get().thenApply(StandaloneWSResponse::getBody).toCompletableFuture();
 
-                            return client.url(randomNumUrl).get().thenCompose( response -> {
+                            return client.url(randomNumUrl).get().thenCompose( response -&gt; {
                                 var num = Integer.parseInt(response.getBody());
-                                return sequence(randomWord, num).thenApply(words -> String.join(" ", words));
+                                return sequence(randomWord, num).thenApply(words -&gt; String.join(" ", words));
                             });
                         });
 
